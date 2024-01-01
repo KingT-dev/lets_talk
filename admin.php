@@ -271,8 +271,9 @@ a {
 
 <?php
     if (isset($_POST["submit"])) {
-      $email=$_POST ["admin_email"];
+      $email= htmlspecialchars($_POST ["admin_email"]);
       $password=$_POST ["admin_password"];
+      
       
       $login= "SELECT * FROM admins WHERE emails='$email' && passwords='$password'";
       $retrieve= mysqli_query($connect, $login);

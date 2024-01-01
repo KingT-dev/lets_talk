@@ -2,13 +2,19 @@
   session_start();
   include("config.php");
 
+  $error = "";
+  
   if (isset($_POST["submit"])) {
     $email=$_POST ["admin_email"];
     $password=$_POST ["admin_password"];
-
-    $login= "UPDATE admins SET passwords='$password' WHERE emails='$email'";
-    $retrieve= mysqli_query($connect, $login);
-  
+    $cpassword=$_POST ["cpassword"];
+    
+    if ($password == $cpassword) {
+      $login= "UPDATE admins SET passwords='$password' WHERE emails='$email'";
+      $retrieve= mysqli_query($connect, $login);     
+  }else{
+      $error = 'Password does not match';
+  }
 
     echo "<script> alert('Password updated')</script>";
 
@@ -271,6 +277,10 @@ a {
                     <input type="password" class="form-control" name="admin_password" id="admin_password" minlength="8" maxlength="15" placeholder="Enter New Password">
                 </div>
                 
+                <label class="form-control__label">Confirm Password</label>
+                <div class="password-field">
+                    <input type="password" class="form-control" name="cpassword" id="cpassword" minlength="8" maxlength="15" placeholder="Confirm Password">
+                </div>
 
                 <button type="submit" name="submit" id="submit" class="form__submit" id="submit">Reset</button>
             </form>
