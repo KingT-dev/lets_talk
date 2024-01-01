@@ -3,7 +3,7 @@
   include("config.php");
 
   $error = "";
-  
+
   if (isset($_POST["submit"])) {
     $email=$_POST ["admin_email"];
     $password=$_POST ["admin_password"];
@@ -11,16 +11,17 @@
     
     if ($password == $cpassword) {
       $login= "UPDATE admins SET passwords='$password' WHERE emails='$email'";
-      $retrieve= mysqli_query($connect, $login);     
-  }else{
-      $error = 'Password does not match';
-  }
-
-    echo "<script> alert('Password updated')</script>";
+      $retrieve= mysqli_query($connect, $login);  
+      echo "<script> alert('Password updated')</script>";
 
     ?>
-    <script>location.href='admin.php'</script>
+    <script>location.href='admin.php'</script>   
     <?php
+  }else{
+       $error = 'Password does not match';
+  }
+
+    
   }
 
 
@@ -265,6 +266,9 @@ a {
             <div class="logo">
                      
             </div>
+
+            <h4 style="color: red; font-weight:bold;"><?php echo $error?></h4>
+            
             <h1 class="form__title">Recover Password</h1>
             <p class="form__description">Fill the form to recover password.</p>
 
