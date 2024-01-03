@@ -1,6 +1,32 @@
 <?php
   session_start();
   include("config.php");
+
+  $error = "";
+
+  if (isset($_POST["submit"])) {
+    $email=$_POST ["user_email"];
+    $password=$_POST ["user_password"];
+    $cpassword=$_POST ["cpassword"];
+    
+    if ($password == $cpassword) {
+      $login= "UPDATE users SET passwords='$password' WHERE emails='$email'";
+      $retrieve= mysqli_query($connect, $login);  
+      echo "<script> alert('Password updated')</script>";
+
+    ?>
+    <script>location.href='login.php'</script>   
+    <?php
+  }else{
+       $error = 'Password does not match';
+  }
+
+    
+  }
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -240,55 +266,30 @@ a {
             <div class="logo">
                      
             </div>
-            <h1 class="form__title">Log into your Account</h1>
-            <p class="form__description">Welcome! Enter your information</p>
+
+            <h4 style="color: red; font-weight:bold;"><?php echo $error?></h4>
+            
+            <h1 class="form__title">Recover Password</h1>
+            <p class="form__description">Fill the form to recover password.</p>
 
             <form method="POST" action="">
                 <label class="form-control__label">Email:</label>
-                <input type="text" class="form-control" name="admin_email" id="admin_email" placeholder="Email">
+                <input type="text" class="form-control" name="user_email" id="admin_email" placeholder="Email">
         
-                <label class="form-control__label">Password</label>
+                <label class="form-control__label">New Password</label>
                 <div class="password-field">
-                    <input type="password" class="form-control" name="admin_password" id="admin_password" minlength="8" maxlength="15" placeholder="Enter Password">
+                    <input type="password" class="form-control" name="user_password" id="admin_password" minlength="8" maxlength="15" placeholder="Enter New Password">
                 </div>
-                <div class="password__settings">
-                    <label class="password__settings__remember">
-                        <input type="checkbox">
-                        <span class="custom__checkbox"></span>
-                        Remember me
-                    </label>
-        
-                    <a href="recover_pass.php">Forgot Password?</a>
+                
+                <label class="form-control__label">Confirm Password</label>
+                <div class="password-field">
+                    <input type="password" class="form-control" name="cpassword" id="cpassword" minlength="8" maxlength="15" placeholder="Confirm Password">
                 </div>
-        
-                <button type="submit" name="submit" id="submit" class="form__submit" id="submit">Log In</button>
+
+                <button type="submit" name="submit" id="submit" class="form__submit" id="submit">Reset</button>
             </form>
         </section>
     </main> 
    
 </body>
 </html>
-
-<?php
-    if (isset($_POST["submit"])) {
-      $email= htmlspecialchars($_POST ["admin_email"]);
-      $password= htmlspecialchars($_POST ["admin_password"]);
-      
-      
-      $login= "SELECT * FROM admins WHERE emails='$email' && passwords='$password'";
-      $retrieve= mysqli_query($connect, $login);
-      $sql_check= mysqli_fetch_all($retrieve, MYSQLI_ASSOC);
-    
-      if(!$sql_check){
-        echo "<script> alert('User does not exist')</script>";
-    }else{
-        ?>
-        <script>location.href='control.php'</script>
-        <?php
-        $_SESSION['email']= $email;
-    };
-    }
-  
-   
-  
-?>

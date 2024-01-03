@@ -1,3 +1,8 @@
+<?php
+  session_start();
+  include("config.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +10,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
+<?php
+  if (isset($_POST["submit"])) {
+    $email= htmlspecialchars($_POST ["user_email"]);
+    $password= htmlspecialchars($_POST ["user_password"]);
+    
+    
+    $login= "SELECT * FROM users WHERE emails='$email' && passwords='$password'";
+    $retrieve= mysqli_query($connect, $login);
+    $sql_check= mysqli_fetch_all($retrieve, MYSQLI_ASSOC);
+  
+    if(!$sql_check){
+      echo "<script> alert('User does not exist')</script>";
+  }else{
+      ?>
+      <script>location.href='control.php'</script>
+      <?php
+      $_SESSION['email']= $email;
+  };
+  }
+
+?>
 
 <style>
     
@@ -233,7 +260,7 @@ a {
         
                 <label class="form-control__label">Password</label>
                 <div class="password-field">
-                    <input type="password" class="form-control" minlength="8" name="user_password" id="user_password" placeholder="Password">
+                    <input type="password" class="form-control" minlength="8" maxlength="15" name="user_password" id="user_password" placeholder="Password">
                 </div>
                 <div class="password__settings">
                     <label class="password__settings__remember">
@@ -242,14 +269,14 @@ a {
                         Remember me
                     </label>
         
-                    <a href="#">Forgot Password?</a>
+                    <a href="user_pass.php">Forgot Password?</a>
                 </div>
         
                 <button type="submit" name="submit" id="submit" class="form__submit" id="submit">Log In</button>
             </form>
         
             <p class="form__footer">
-                Don't have an account?<br> <a href="#">Create new account</a>
+                Don't have an account?<br> <a href="signup.php">Create new account</a>
             </p>
         </section>
     </main>
