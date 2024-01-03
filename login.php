@@ -25,7 +25,7 @@
       echo "<script> alert('User does not exist')</script>";
   }else{
       ?>
-      <script>location.href='control.php'</script>
+      <script>location.href='user.php'</script>
       <?php
       $_SESSION['email']= $email;
   };
