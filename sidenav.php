@@ -1,7 +1,6 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar" style="background-color: #632F85">
     <div class="user-profile">
         <div class="user-image">
-            <!-- <img src="images/faces/face28.png"> -->
             <i class='bx bx-user mb-2' style='color:#ffffff; font-size:3.5rem'></i>
         </div>
         <div class="user-name">
