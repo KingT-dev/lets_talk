@@ -1,0 +1,10 @@
+RewriteEngine on
+RewriteCond %{THE_REQUEST} /([^.]+)\.php [NC]
+RewriteRule ^ /%1 [NC,L,R]
+
+RewriteCond %{REQUEST_FILENAME}.php -f 
+RewriteRule ^ %{REQUEST_URI}.php [NC,L]
+
+<FilesMatch "\.(jpg|jpeg|png|gif|ico|webp)$">
+    Header set Cache-Control "max-age=31536000, public"
+</FilesMatch>
