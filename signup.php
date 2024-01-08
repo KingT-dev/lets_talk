@@ -8,12 +8,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body style="background-color: rgba(255, 139, 16, 0.612);">
+<body style="background-color: rgb(230, 230, 230);">
 <style>
    
 input{
     color:rgb(69, 26, 26);
 }
+
+.btnn:hover{
+        background-color: rgb(255, 111, 0);
+        color: white;
+    }
 </style>
     <?php 
 include 'nav.php';
@@ -30,7 +35,7 @@ include 'nav.php';
                                 <h4 class="brown-text darken-2 center"><b> Sign Up here.</b> </b></h4>
                             </div> 
                             <div class="card-content">                       
-                                <form action="index.php" method="post" enctype="multipartform-data"> 
+                                <form action="welcome.php" method="post" enctype="multipartform-data"> 
                                     <label for="username" class="brown-text darken-2 ">USERNAME</label>
                                     <input type="text" name="username" id="username"   required>
                                     <label for="email" class="brown-text darken-2 ">EMAIL</label>
@@ -43,7 +48,7 @@ include 'nav.php';
                                             <div class="col l4"></div>
                                             <div class="col l4">
 
-                                                <input type="submit" name="submit" id="submit" class="btn orange darken-2 brown-text darken-2 " value="SIGN UP">
+                                                <input type="submit" name="submit" id="submit" class="btnn brown-text darken-2 " style="border:solid 1px grey; border-radius:50px; padding:15px; display:block; position:relative;right:10px;" value="SIGN UP NOW">
 
                                             </div>
                                             <div class="col l4"></div>

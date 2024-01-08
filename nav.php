@@ -31,7 +31,7 @@ include 'config.php';
 }
 
 </style>
-<body style="background-color: rgba(255, 111, 0, 0.653);">
+<body style="background-color: rgb(230, 230, 230);">
 <section id="header">
 <div style="background-color:rgb(43, 20, 20);padding:3px; ">
   <p class="container white-text center"><b>LET'S TALK</b></p>
@@ -78,7 +78,7 @@ include 'config.php';
               
         </div>
     </nav>
-    <br><br><br><br><br>
+    <br><br>
     
     
  
