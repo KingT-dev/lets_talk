@@ -44,25 +44,50 @@ input{
                 $error= "Email already exists!";
             } else {
                     // Proceed with registration
-                    $insert= "INSERT INTO users (usernames, emails, passwords, dob) VALUES ('$username', '$email', '$password', '$dob')";
-                    mysqli_query($connect, $insert);
+                    // $insert= "INSERT INTO users (usernames, emails, passwords, dob) VALUES ('$username', '$email', '$password', '$dob')";
+                    // mysqli_query($connect, $insert);
                 
                 // Proceed with registration using prepared statement
-                // $insert = "INSERT INTO users (usernames, emails, passwords, dob) VALUES (?, ?, ?, ?)";
-                // $stmt = mysqli_prepare($connect, $insert);
-                // mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $password, $dob);
-                // mysqli_stmt_execute($stmt);
+                $insert = "INSERT INTO users (usernames, emails, passwords, dob) VALUES (?, ?, ?, ?)";
+                $stmt = mysqli_prepare($connect, $insert);
+                mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $password, $dob);
+                mysqli_stmt_execute($stmt);
 
                 // Store values in session
-                $_SESSION['email'] = $email;
-                $_SESSION['username'] = $username;
+                 $_SESSION['email'] = $email;
+                 $_SESSION['username'] = $username;
 
                 // Redirect only if the registration is successful
                 header("Location: control.php");
                 exit();
             }
+
+             // Define the recipient email address
+             $to = $_SESSION['email'];
+
+             // Define the subject of the email
+             $subject = "Successful Registration";
+ 
+             // Define the message body
+             $message = "Thank you for registering on our website. Your registration was successful.";
+ 
+             // Define additional headers 
+             $headers = "From: bossadetim1@gmail.com";
+             
+ 
+             // Send the email
+             $mailSuccess = mail($to, $subject, $message, $headers);
+ 
+             // Check if the email was sent successfully
+             if ($mailSent) {
+                 echo "Registration successful";
+             } else {
+                 echo "Registration Failed";
+             }
+ 
         }
-                                ?>
+
+    ?>
 
     <!-- <img class="responsive-img" src="img/pawel-czerwinski-Tyg0rVhOTrE-unsplash.jpg" alt="" width="100%"> -->
 <div class="container">

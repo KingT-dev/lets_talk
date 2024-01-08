@@ -17,7 +17,7 @@
     $password= htmlspecialchars($_POST ["user_password"]);
     
     
-    $login= "SELECT * FROM users WHERE emails='$email' && passwords='$password'";
+    $login= "SELECT * FROM users WHERE emails='$email' || usernames='$email' && passwords='$password'";
     $retrieve= mysqli_query($connect, $login);
     $sql_check= mysqli_fetch_all($retrieve, MYSQLI_ASSOC);
   
@@ -28,6 +28,7 @@
       <script>location.href='user.php'</script>
       <?php
       $_SESSION['email']= $email;
+
   };
   }
 
@@ -254,9 +255,9 @@ a {
             </div>
             <h1 class="form__title">Let's Talk </h1>
 
-            <form>
-                <label class="form-control__label">Email</label>
-                <input type="text" class="form-control" name="user_email" id="user_email" placeholder="Email address or mobile number">
+            <form method="POST">
+                <label class="form-control__label">Username/Email</label>
+                <input type="text" class="form-control" name="user_email" id="user_email" placeholder="Email address or Username">
         
                 <label class="form-control__label">Password</label>
                 <div class="password-field">
